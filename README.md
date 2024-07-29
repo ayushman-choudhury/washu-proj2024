@@ -3,7 +3,7 @@
 ## GIS_EHR Integration
 The main purpose of this project was to investigate a pipeline for integrating GIS data (location data for spatial analysis, and location-based data for socio-economic analysis) with our EHR data. 
 
-See the GIS_EHR folder for more details.
+See the gis_ehr folder for more details.
 
 ## Geocoding Comparison
 A task related to the above was to select a geocoder — either ArcGIS or DeGAUSS. I ran each on subsets of the data, and used both summary tables and manual comparisons to find that ArcGIS would be better for us.

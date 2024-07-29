@@ -10,13 +10,15 @@ geocodeManualAnalysis.py includes how I conducted this manual analysis. The code
 
 Table:
 
-![comparison table](geocodeComparisonTables.png)
+![comparison table](./images/geocodeComparisonTables.png)
+
+![violin plot of comparisons](./images/violinPlot.png)
 
 
 ## Test plots of anaphylaxis cohort
 
-![national scatterplot](anaphylaxisScatterplot.png)
+![national scatterplot](./images/anaphylaxisScatterplot.png)
 
-![county choropleth](anaphylaxisCountyPlot.png)
+![county choropleth](./images/anaphylaxisCountyPlot.png)
 
-![tract choropleth](anaphylaxisTractPlot.png)
+![tract choropleth](./images/anaphylaxisTractPlot.png)
