@@ -1,18 +1,16 @@
-# Ayushman Choudhury - BIDS project, summer 2024
+# Ayushman Choudhury - BIDS projects, summer 2024
 
-# Working to-do list
+## GIS_EHR Integration
+The main purpose of this project was to investigate a pipeline for integrating GIS data (location data for spatial analysis, and location-based data for socio-economic analysis) with our EHR data. 
 
-## 2024/06/03 Meeting 
-Ayushman, Linying
+See the GIS_EHR folder for more details.
 
-### Prepare the data
-0. Find patients with anaphylaxis
-1. link person_id (+condition_occurence_date) to location table
-2. QCs and visualization
+## Geocoding Comparison
+A task related to the above was to select a geocoder — either ArcGIS or DeGAUSS. I ran each on subsets of the data, and used both summary tables and manual comparisons to find that ArcGIS would be better for us.
 
-### Geocoding
-1. Two options: DeGAUSS at https://degauss.org/index.html
-2. WashU ArcGIS: Abigail's code
+See the geocodingComparison folder for more details.
 
-### References:
-1. OHDSI GIS Workshop: https://ohdsi.github.io/GIS/ (problem: gaiaDB link not working)
+## Food Allergy/Anaphylaxis study
+I used the GIS_EHR integration to study the links between Area Deprivation Index (a Census-Block-Group metric of socio-economic deprivation) and the rate/outcomes of Food Allergy / Food Anaphylaxis events. 
+
+See the faStudy folder for more details.
