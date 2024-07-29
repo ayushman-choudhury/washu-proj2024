@@ -1,0 +1,92 @@
+---
+title: "degaussNotebook"
+author: "Ayushman Choudhury"
+date: "2024-06-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Resources: - <https://ohdsi.github.io/GIS/ht-geocode.html>
+
+```{r libraries}
+#install.packages("remotes")
+#remotes::install_github("OHDSI/GIS")
+library(gaiaCore)
+
+#install.packages("DatabaseConnector")
+library(DatabaseConnector)
+print('hello world!')
+```
+
+## Connect to our WUSTL datalake
+
+You can also embed plots, for example:
+
+```{r datalake}
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  connectionString = "jdbc:databricks://adb-7423990253170059.19.azuredatabricks.net:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/e815bd9e8111dad9;EnableArrow=0;",
+  dbms = "spark",
+  user = "token",
+  password = "dapi33f016edeb802db4bdc565469be4bcdc-2",
+  pathToDriver = "/Users/ayushmanc/Documents/Databricks JDBC 42 2.6.38.1068")
+
+conn <- DatabaseConnector::connect(connectionDetails)
+
+print(conn)
+```
+
+## Gaia steps
+
+1.  Ingest location table
+
+```{r}
+transformedLocation <- getLocationAddresses(
+  connectionDetails = connectionDetails,
+  cdmDatabaseSchema = "sandbox.zhang_lab")
+
+print(typeof(transformedLocation))
+```
+
+2.  Split table on whether addresses are already geocoded
+
+```{r eval=FALSE}
+splitResult <- splitAddresses(addressTable = transformedLocation)
+alreadyGeocodedLocation <- splitResult$geocoded
+notGeocodedLocation <- splitResult$ungeocoded
+```
+
+3.  Geocode the addresses that aren't geocoded
+
+```{r eval=FALSE}
+geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
+```
+
+```{r eval=FALSE}
+readr::write_csv(
+    subset(
+        addressTable[(chunksize * (i - 1)):(chunksize * i),], 
+        !is.na(address)),
+    paste0(
+      tempdir(), 
+      '\\add.csv'
+    )
+)
+
+
+system(
+    paste0(
+        'docker run --rm -v ', 
+        tempdir(), 
+        ':/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv'
+    )
+)
+
+system('docker run --rm -v $PWD:/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv')
+```
+
+This line: system(paste0('docker run --rm -v ', tempdir(), ':/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv'))
+
+Seems suspicious. Source: <https://github.com/OHDSI/GIS/blob/main/R/geocode.R>
