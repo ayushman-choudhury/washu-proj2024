@@ -9,11 +9,12 @@ This project seeks to integrate EHR and GIS, so that we can conduct various kind
 - HTTP package (for ArcGIS API calls): `requests`
 - Numerical packages: `math`, `pandas`, `geopandas`
 
-## Outline of Terminal Instructions
+## Sample Terminal Instructions
+I provide sampleAddresses.csv, which includes 3 addresses: Becker Library, the Danforth University Center, and the Missouri State Capitol building. 
 ```
-python geocode.py FILENAME.CSV
-python join_adi.py results/GEOCODED_FILENAME.CSV
-python plot_adi.py results/ADI_GEOCODED_FILENAME.CSV
+python geocode.py sampleAddresses
+python join_adi.py results/GEOCODED_sampleAddresses.CSV
+python plot_adi.py results/ADI_GEOCODED_sampleAddresses.CSV
 ```
 
 
