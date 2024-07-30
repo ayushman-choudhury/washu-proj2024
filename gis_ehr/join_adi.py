@@ -55,7 +55,7 @@ joined_gdf = gpd.sjoin(locations_gdf, census_blocks, how='inner', predicate='wit
 joined_df = pd.DataFrame(joined_gdf[['location_id', 'FIPS']])
 print("Shape of joined_df: ", joined_df.shape)
 
-df = df.merge(joined_df, on='location_id', how='inner')
+df = df.merge(joined_df, on='location_id', how='left')
 
 
 

@@ -2,19 +2,24 @@
 
 EHR (Electronic Health Records) is stored in WUSTL's data lake, run on Databricks. 
 GIS (Geographic Information Systems) refers in this context to any spatial data. Coordinates for scatterplots, distances, summarization into census regions (tracts, blocks, etc.), and metrics related to those regions are all geographic data.
-This project seeks to integrate EHR and GIS, so that we can conduct various kinds of spatial analysis. 
+Combining these two allows us to conduct various kinds of spatial analysis. 
+
+Below, I demonstrate a process for integrating addresses from EHR with the Area Deprivation Index, a spatial metric. This could be adapted for other metrics as needed.
 
 ## Environment
 - File-managing packages: `argparse`, `os`
 - HTTP package (for ArcGIS API calls): `requests`
-- Numerical packages: `math`, `pandas`, `geopandas`
+- Numerical packages: `math`, `pandas`
+- Plotting packages: `geopandas`, `plotly.graph_objects`
 
 ## Sample Terminal Instructions
-I provide sampleAddresses.csv, which includes 3 addresses: Becker Library, the Danforth University Center, and the Missouri State Capitol building. 
+I provide `sampleAddresses.csv`, which includes: Becker Library, Danforth University Center, The Gateway Arch, and The White House.
+
+Run the following from the gis_ehr directory:
 ```
-python geocode.py sampleAddresses
-python join_adi.py results/GEOCODED_sampleAddresses.CSV
-python plot_adi.py results/ADI_GEOCODED_sampleAddresses.CSV
+python geocode.py sampleAddresses.csv
+python join_adi.py results/GEOCODED_sampleAddresses.csv
+python plot_adi.py results/ADI_GEOCODED_sampleAddresses.csv
 ```
 
 

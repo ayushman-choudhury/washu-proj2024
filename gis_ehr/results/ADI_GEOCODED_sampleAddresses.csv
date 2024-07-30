@@ -1,4 +1,5 @@
 location_id,address_1,address_2,givenCity,givenState,givenZip,street_address,matched_address,location_x,location_y,score,status,FIPS,GISJOIN,ADI_NAT_20,ADI_ST_20
 1,660 S Euclid Ave,,SAINT LOUIS,MO,63110,660 S Euclid Ave,"660 S Euclid Ave, Saint Louis, Missouri, 63110",-90.26307576057502,38.635187930607685,100,M,295101124003,G29051001124003,25,1
 2,,6475 Forsyth Blvd,SAINT LOUIS,MO,63105,6475 Forsyth Blvd,"6475 Forsyth Blvd, Saint Louis, Missouri, 63105",-90.31060912210752,38.64692190155176,100,M,291892163001,G29018902163001,GQ,GQ
-3,201 W Capitol Ave,,Jefferson City,MO,65101,201 W Capitol Ave,"201 W Capitol Ave, Jefferson City, Missouri, 65101",-92.1721092503892,38.57876949598938,100,M,290510207002,G29005100207002,95,10
+3,48 N 4th St,,SAINT LOUIS,MO,63102,48 N 4th St,"48 N 4th St, Saint Louis, Missouri, 63102",-90.1885064790385,38.62568365941024,100,M,295101256002,G29051001256002,49,3
+4,1600 Pennsylvania Avenue NW,,WASHINGTON,DC,20500,1600 Pennsylvania Avenue NW,"1600 Pennsylvania Ave NW, Washington, District of Columbia, 20500",-77.03654849999998,38.8976760000001,100,M,,,,
