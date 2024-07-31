@@ -98,10 +98,11 @@ python plot_adi.py [ADI_GEOCODED_filename.csv]
 ```
 
 
-The input CSV must have columns:
-- a
-- b
-- c
+The input CSV is ideally the output CSV of the previous step, found in `results`. If not, ensure that it has these columns:
+- location_x
+- location_y
+- FIPS
+- ADI_NAT_20
 
-The script will output a PDF (dpi 300) with all the plots.
+The script will output two .png files, with some basic plots.
 
