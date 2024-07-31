@@ -10,7 +10,7 @@ Below, I demonstrate a process for integrating addresses from EHR with the Area 
 - File-managing packages: `argparse`, `os`
 - HTTP package (for ArcGIS API calls): `requests`
 - Numerical packages: `math`, `pandas`
-- Plotting packages: `geopandas`, `plotly.graph_objects`
+- Plotting packages: `geopandas`, `plotly.graph_objects`, `matplotlib.pyplot`
 
 ## Sample Terminal Instructions
 I provide `sampleAddresses.csv`, which includes: Becker Library, Danforth University Center, The Gateway Arch, and The White House.

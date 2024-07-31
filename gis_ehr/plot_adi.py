@@ -48,7 +48,6 @@ scatterPlot = go.Figure(data=go.Scattergeo(
         line = dict(width=1, color='rgba(0, 0, 0)'),
         color = colors,
         colorbar_title="ADI_NAT_20",
-        colorscale='Viridis'  # Adjust colorscale as needed
     )
 ))
 
@@ -57,26 +56,20 @@ scatterPlot.update_layout(
     geo_scope='usa'
 )
 
-
-# UNCOMMENT LATER
-#scatterPlot.write_image('TESTScatterplot.png')
+scatterPlot.write_image('results/scatterplot.png')
 
 
 
-# --- Load in MO Census Block Group shapefile ---
-
+# --- Load in and merge MO Census Block Group shapefile ---
 
 shp = gpd.read_file('resources/tl_2020_29_bg20.shp')
 shp.rename(columns={'GEOID20':'FIPS'}, inplace=True)
 census_blocks = shp.loc[:, ['FIPS', 'geometry']]
 census_blocks['FIPS'] = census_blocks['FIPS'].astype(str)
 
-
-
-# --- Merge geometries with data ---
-
 df_filtered = df[~pd.isna(df['ADI_NAT_20'])]
 
+# Establish generous window for later plots
 x_range = max(df_filtered['location_x']) - min(df_filtered['location_x'])
 x_window = [min(df_filtered['location_x']) - 0.01 - x_range/2, 
             max(df_filtered['location_x']) + 0.01 + x_range/2]
@@ -85,35 +78,50 @@ y_window = [min(df_filtered['location_y']) - 0.01 - y_range/2,
             max(df_filtered['location_y']) + 0.01 + y_range/2]
 window = [x_window, y_window]
 
+# Groupby to get counts
 fips_summary = df.groupby(['FIPS', 'ADI_NAT_20', 'ADI_ST_20']).size().reset_index(name='Count')
 fips_summary['FIPS'] = fips_summary['FIPS'].astype(int).astype(str)
 
 merged_df = fips_summary.merge(census_blocks, on='FIPS')
 
 merged_gdf = gpd.GeoDataFrame(merged_df, crs=census_blocks.crs)
-print(merged_gdf)
-print(type(merged_gdf))
 
-
-
-# --- Count choropleth plot ---
-
-fig, axs = plt.subplots(1, 1)
-
-ax_count = axs
-ax_count.set_title("Counts by Census Block Group")
-ax_count.set_xlim(x_window)
-ax_count.set_ylim(y_window)
-merged_gdf.plot(column='Count', edgecolor='black', legend=True, ax=ax_count)
-
-#plt.savefig('TESTchoropleth.png')
-
-
-
-# --- ADI choropleth plot ---
+# Separate ADI numeric and string error codes
 merged_gdf['ADI_NAT_20_numeric'] = pd.to_numeric(merged_gdf['ADI_NAT_20'], errors='coerce')
 adiNum_merged_gdf = merged_gdf[merged_gdf['ADI_NAT_20_numeric'].notna()]
 adiString_merged_gdf = merged_gdf[merged_gdf['ADI_NAT_20_numeric'].isna()]
 
-print(adiNum_merged_gdf)
-print(adiString_merged_gdf)
+
+
+# --- Choropleth plots ---
+
+plt.figure(figsize=[10,5])
+fig, axs = plt.subplots(2, 2)
+
+# Count
+ax_count = axs[0,0]
+ax_count.set_title("Counts by CBG")
+ax_count.set_xlim(x_window)
+ax_count.set_ylim(y_window)
+merged_gdf.plot(column='Count', edgecolor='black', legend=True, ax=ax_count)
+
+# Blank
+axs[0, 1].axis('off')
+
+# ADI numeric
+ax_adiNum = axs[1,0]
+ax_adiNum.set_title("ADI (Numeric) by CBG")
+ax_adiNum.set_xlim(x_window)
+ax_adiNum.set_ylim(y_window)
+adiNum_merged_gdf.plot(column='ADI_NAT_20_numeric', edgecolor='black', legend=True, ax=ax_adiNum)
+
+
+# ADI string errors
+ax_adiStr = axs[1,1]
+ax_adiStr.set_title("ADI Errors")
+ax_adiStr.set_xlim(x_window)
+ax_adiStr.set_ylim(y_window)
+adiString_merged_gdf.plot(column='ADI_NAT_20', edgecolor='black', legend=True, ax=ax_adiStr)
+
+plt.tight_layout()
+plt.savefig('results/choroplethPlots.png')
