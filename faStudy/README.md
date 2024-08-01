@@ -9,6 +9,8 @@ As a research motivation, there has been an observed increase in food allergy ra
 ## Files
 1. `adiFAStudy.html` is an RStudio export of of my R Markdown file. I censor some database connection details for privacy. 
 
+View a render of it using GitHub's HTML-preview: https://html-preview.github.io/?url=https://github.com/ayushman-choudhury/washu-proj2024/blob/main/faStudy/adiFAStudy.html
+
 2. `adiFAPoster.pdf` is the poster that I presented at our internship program's final presentation day.
 
 3. (Coming soon) my extended abstract.
