@@ -13,4 +13,4 @@ View a render of it using GitHub's HTML-preview: https://html-preview.github.io/
 
 2. `adiFAPoster.pdf` is the poster that I presented at our internship program's final presentation day.
 
-3. (Coming soon) my extended abstract.
+3. `adiFAPaper.pdf` is the paper that I submitted to the Institute as the culmination of my internship. 
